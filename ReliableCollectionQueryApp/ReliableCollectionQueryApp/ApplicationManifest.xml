@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ReliableCollectionQueryAppType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+   <Parameters>
+      <Parameter Name="SampleStatefulService_MinReplicaSetSize" DefaultValue="2" />
+      <Parameter Name="SampleStatefulService_PartitionCount" DefaultValue="1" />
+      <Parameter Name="SampleStatefulService_TargetReplicaSetSize" DefaultValue="3" />
+   </Parameters>
+   <ServiceManifestImport>
+      <ServiceManifestRef ServiceManifestName="SampleStatefulServicePkg" ServiceManifestVersion="1.0.0" />
+      <ConfigOverrides />
+   </ServiceManifestImport>
+   <DefaultServices>
+      <Service Name="SampleStatefulService">
+         <StatefulService ServiceTypeName="SampleStatefulServiceType" TargetReplicaSetSize="[SampleStatefulService_TargetReplicaSetSize]" MinReplicaSetSize="[SampleStatefulService_MinReplicaSetSize]">
+            <UniformInt64Partition PartitionCount="[SampleStatefulService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+         </StatefulService>
+      </Service>
+   </DefaultServices>
+</ApplicationManifest>
